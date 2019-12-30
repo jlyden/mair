@@ -8,16 +8,6 @@ from flask import (
 
 bp = Blueprint('owls', __name__, url_prefix='/owls')
 
-@bp.before_app_request
-def load_current_game():
-    game_id = session.get('game_id')
-
-    if game_id is None:
-        g.user = None
-    else:
-        g.user = sql.getOwlByGameId(game_id)
-
-
 @bp.route('/start', methods=(['GET','POST']))
 def start():
     if request.method == 'POST':
@@ -37,14 +27,15 @@ def start():
 
     return render_template('owls/start.html')
 
-@bp.route('/resume', methods=(['GET']))
+@bp.route('/resume')
 def resume():
-    if request.args is None:
+    if request.args.get('owl_id') is None:
         flash('You must select an owl to resume the game.')
-        return render_template('owls/list.html')
+        return redirect(url_for('owls.list'))
     else:
         # Find game
-        game_id = sql.getGameByOwl(request.args.get('owl_id'))
+        owl_id = int(request.args.get('owl_id'))
+        game_id = sql.getGameIdByOwlId(owl_id)
 
         # Initiate session
         session.clear()
@@ -54,15 +45,15 @@ def resume():
 
 @bp.route('/state')
 def state():
-    if g.user:
-        owl_nom = g.user['nom']
-        owl_life = g.user['life']
+    this_owl = helpers.getOwl(session.get('game_id'))
+    if this_owl:
         today = sql.getDay(session['game_id'])
-        return render_template('owls/state.html', owl_nom=owl_nom, owl_life=owl_life, day=today)
+        return render_template('owls/state.html', owl=this_owl, day=today)
     else:
+        flash('no active game - please create an owl or select from list')
         return redirect(url_for('owls.start'))
 
 @bp.route('/list')
 def list():
-    all_owls = sql.getAllOwls()
+    all_owls = helpers.getAllOwls()
     return render_template('owls/list.html', all_owls=all_owls)

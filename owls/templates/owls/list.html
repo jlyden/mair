@@ -6,9 +6,9 @@
 
 {% block content %}
     <ul>
-        {% for owl in all_owls %}
-            <a href="{{ url_for('owls.resume', owl_id=owl[0]) }}">resume game for {{ owl[1] }}</a>
-            <div>life: {{ owl[2] }}</div>
+        {% for key,value in all_owls.items() %}
+            <a href="{{ url_for('owls.resume', owl_id=value['id']) }}">resume game for {{ value['nom'] }}</a>
+            <div>life: {{ value['life'] }}</div>
         {% endfor %}
     </ul>
 {% endblock %}

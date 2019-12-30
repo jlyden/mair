@@ -27,7 +27,7 @@ def create_app(test_config=None):
     app.register_blueprint(owls.bp)
     
     # sanity check
-    @app.route('/sanity')
+    @app.route('/')
     def sanity_check():
         return 'This is a sanity check.'
     

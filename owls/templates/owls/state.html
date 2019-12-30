@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}game state{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% if g.game %}
+        <h2>day: {{ day }}</h2>
+        <h2>owl: {{ owl_nom }}</h2>
+        <h2>life: {{ owl_life }}</h2>
+    {% else %}
+        <div>No active game.</div>
+        <a href="{{ url_for('owls.start') }}">start game</a>
+        <a href="{{ url_for('owls.list') }}">resume game</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,61 @@
+owls and mice
+
+owls:
+ - initial energy level = 10
+ - hunt (uses energy, but can result in food)
+  -- success based on random number
+ - eat (restores energy)
+ - sleep (restore energy)
+ Phase Two:
+ - explore (uses energy, improves hunting success)
+ - reproduce (uses energy, more owls)
+
+mice:
+ - initial count = 4
+ - reproduce, as long as count > 2 mice
+ - reproduction -> mouse count / 2
+
+time: 
+ - 1 day / 2 actions
+ - 1 day -> owl - 3 energy
+ - 1 sleep -> owl + 1 energy 
+ - 1 mouse eaten -> owl + 2 energy
+ - 4 days = mice reproduce 
+
+Phase One:
+ - User = owl
+ - Goal = survive one month
+
+Methods:
+Automatic Actions:
+ - nightFall()
+   - counters.day + 1
+   -- owlAges()
+      -- owl.life - 3
+   -- miceReproduce()
+      -- if day mod 4 = 0:
+      -- counters.mousePopulation += counters.mousePopulation / 2
+
+User Actions:
+ - owlSleep()
+   -- owl.life + 1
+ - owlEat()
+   -- owl.life + 2
+ - owlHunt()
+   -- owl.life - 1 
+   -- randomNum mod 3 = 0 -> owl.mice + 1 
+
+DB:
+Owl: 
+ - id
+ - nom
+ - life
+ - mice
+Game:
+ - id
+ - owl_id FOREIGN KEY
+Counters 
+ - game_id FOREIGN KEY
+ - day
+ - endOfDay bool
+ - mousePopulation

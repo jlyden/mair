@@ -6,6 +6,13 @@
 
 {% block content %}
     <h3>owl: {{ owl['nom'] }}</h2>
-    <h4>day: {{ day }}</h4>
-    <h4>life: {{ owl['life'] }}</h4>
+    <div>
+        <span>day: {{ day }}</span> *** <span>mice: {{ mice }}</span>
+    </div>
+    <div>
+        <span>life: {{ owl['life'] }}</span>  
+        ***  <a href="{{ url_for('owls.sleep') }}">sleep</a>
+        ***  <a href="{{ url_for('owls.hunt') }}">hunt</a>
+        ***  <a href="{{ url_for('owls.eat') }}">eat</a>
+    </div>
 {% endblock %}

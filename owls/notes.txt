@@ -6,6 +6,7 @@ owls:
   -- success based on random number
  - eat (restores energy)
  - sleep (restore energy)
+ - TODO: die (when life == 0)
  Phase Two:
  - explore (uses energy, improves hunting success)
  - reproduce (uses energy, more owls)

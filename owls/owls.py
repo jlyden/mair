@@ -7,6 +7,8 @@ from flask import (
     request, session, url_for
 )
 
+# TODO: end/day colliding with action bonuses
+
 bp = Blueprint('owls', __name__, url_prefix='/owls')
 
 @bp.route('/start', methods=(['GET','POST']))
@@ -43,6 +45,11 @@ def resume():
         session['game_id'] = game_id
         return redirect(url_for('owls.state'))
 
+@bp.route('/list')
+def list():
+    all_owls = helpers.getAllOwls()
+    return render_template('owls/list.html', all_owls=all_owls)
+
 @bp.route('/state')
 def state():
     game_id = session.get('game_id')
@@ -54,11 +61,6 @@ def state():
     else:
         flash('no active game - please create an owl or select from list')
         return redirect(url_for('owls.start'))
-
-@bp.route('/list')
-def list():
-    all_owls = helpers.getAllOwls()
-    return render_template('owls/list.html', all_owls=all_owls)
 
 @bp.route('/sleep')
 def sleep():

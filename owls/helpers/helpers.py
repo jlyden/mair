@@ -65,7 +65,8 @@ def endDay(game_id, owl_dict):
 
 def miceReproduce(game_id):
     current_mouse_pop = sql.getMousePopulation(game_id)
-    sql.updateMousePopulation(game_id, current_mouse_pop // 2)
+    new_mouse_pop = current_mouse_pop + current_mouse_pop // 2 
+    sql.updateMousePopulation(game_id, new_mouse_pop)
     return 
 
 def owlAge(owl_dict):
@@ -79,7 +80,9 @@ def owlSleep(owl_dict):
 def owlEat(owl_dict):
     message = None
     if owl_dict['mice'] > 0:
-        sql.updateLife(owl_dict['id'], owl_dict['life'] + const.LIFE_BONUS_FOR_EATING)
+        new_value = owl_dict['life'] + const.LIFE_BONUS_FOR_EATING
+        print('new_value in owlEat() is ' + str(new_value))
+        sql.updateLife(owl_dict['id'], new_value)
         sql.updateOwlMiceCount(owl_dict['id'], owl_dict['mice'] - 1)
         message = "You ate a mouse."
     else:

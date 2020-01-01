@@ -60,3 +60,24 @@ Counters
  - day
  - endOfDay bool
  - mousePopulation
+
+---------------------------------------
+Class Refactor
+
+Owl Class
+  nom: str
+  life: int = const.INITIAL_LIFE
+  mice: int = 0
+  
+  sleep()
+  
+  eat()
+
+  hunt()
+
+
+World Class
+  owl: str (owl's name)
+  day: int = 1
+  nightfall: bool = False
+  mouse_pop: int = const.INITIAL_MOUSE_POP

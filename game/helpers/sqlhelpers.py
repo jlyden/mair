@@ -1,20 +1,20 @@
-from owls.db import get_db
+from game.db import get_db
 
 # Inserts
-def insertOwl(nom):
+def insertOwl(nom, life, mice):
     db = get_db()
-    db.execute('INSERT INTO owl (nom) VALUES (?)', (nom,))
+    db.execute('INSERT INTO owl (nom, life, mice) VALUES (?, ?, ?)', (nom, life, mice))
     db.commit()
     owl_id = db.execute('SELECT last_insert_rowid()').fetchone()
     return owl_id[0]
 
-def insertGame(owl_id):
+def insertWorld(owl_id, day, nightfall, mouse_pop):
     # Initiate game & counters
     db = get_db()
-    db.execute('INSERT INTO game (owl_id) VALUES (?)', (owl_id,))
-    game_id = db.execute('SELECT last_insert_rowid()').fetchone()
-    db.execute('INSERT INTO counters (game_id) VALUES (?)', (game_id[0],))
+    db.execute('INSERT INTO world (owl_id, day, nightfall, mouse_pop) VALUES (?, ?, ?, ?)', 
+        (owl_id, day, nightfall, mouse_pop))
     db.commit()
+    game_id = db.execute('SELECT last_insert_rowid()').fetchone()
     return game_id[0]
 
 

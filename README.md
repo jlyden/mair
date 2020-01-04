@@ -17,3 +17,6 @@
 1. Initialize & migrate db: `flask db init; flask db migrate; flask db upgrade`
 1. Run application: `flask run`
 
+# References
+* https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+* https://flask.palletsprojects.com/en/1.1.x/testing/

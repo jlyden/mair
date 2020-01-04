@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}owl list{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for owl in owls %}
+            <a href="{{ url_for('resume', owl_id=owl.id) }}">resume game for {{ owl.nom }}</a>
+            <div>life: {{ owl.life }}</div>
+        {% endfor %}
+    </ul>
+{% endblock %}

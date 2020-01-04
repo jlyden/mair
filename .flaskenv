@@ -1,1 +1,2 @@
 FLASK_APP=mair.py
+FLASK_ENV=development

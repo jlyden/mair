@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}game state{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <h3>owl: {{ owl.nom }}</h2>
+    <div>
+        <span>day: {{ world.day }}</span> *** <span>mouse population: {{ world.mouse_pop }}</span>
+        <ul>
+            <li><a href="{{ url_for('sleep', owl_id=owl.id) }}">sleep</a></li>
+            <li><a href="{{ url_for('hunt', owl_id=owl.id) }}">hunt</a></li>
+            <li>owl's mice: {{ owl.mice }}</li>
+            <li><a href="{{ url_for('eat', owl_id=owl.id) }}">eat</a></li>
+        </ul>
+    </div>
+    <div>
+        <span>life: {{ owl.life }}</span>  
+    </div>
+{% endblock %}

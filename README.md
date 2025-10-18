@@ -4,7 +4,7 @@
 
 # Requirements
 * Python 3
-* Flask, flask-sqlAlchemy, flask-migrate, python-dotenv
+* Flask, flask-sqlAlchemy, flask-migrate, python-dotenv, pytest
 
 # Setup
 *GitBash commands run from Windows*
@@ -12,11 +12,11 @@
 1. Clone repo: `git clone https://github.com/jlyden/mair`
 1. Enter folder: `cd mair`
 1. Create virtual environment: `python -m venv venv`
-1. Activate virtual environment: `. venv\Scripts\activate`
-1. Install dependencies: `pip install flask python-dotenv flask-sqlalchemy flask-migrate`
+1. Activate virtual environment: `. venv/Scripts/activate`
+1. Install dependencies: `pip install flask python-dotenv flask-sqlalchemy flask-migrate pytest`
 1. Initialize & migrate db: `flask db init; flask db migrate; flask db upgrade`
 1. Run application: `flask run`
 
 # References
-* https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+* https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xv-a-better-application-structure
 * https://flask.palletsprojects.com/en/1.1.x/testing/

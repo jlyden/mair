@@ -8,4 +8,10 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-from app import routes, models
+from app.errors import bp as errors_bp
+app.register_blueprint(errors_bp)
+
+from app.actions import bp as actions_bp
+app.register_blueprint(actions_bp, url_prefix='/actions')
+
+# from app import routes, models

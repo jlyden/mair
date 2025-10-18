@@ -75,16 +75,14 @@ def resume():
 @app.route('/state')
 def state():
     world_id = session.get('world_id')
-    print('in state, world_id is ' + str(world_id))
-    this_world = World.query.get(world_id)
-    print('in state, this_world.id from db is ' + str(this_world.id))
-    if this_world:
+    if world_id is None:
+        flash(MSG_NO_ACTIVE_GAME)
+        return redirect(url_for('start'))
+    else:
+        this_world = World.query.get(world_id)
         this_owl = Owl.query.get(this_world.owl_id)
         print('in state, this_owl.id from db is ' + str(this_owl.id))
         return render_template('app/state.html', owl=this_owl, world=this_world)
-    else:
-        flash(MSG_NO_ACTIVE_GAME)
-        return redirect(url_for('start'))
 
 
 @app.route('/sleep')
